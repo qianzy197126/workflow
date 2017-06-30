@@ -4,6 +4,9 @@ const autoprefixer = require('autoprefixer')
 
 const dflPort = 8080  //配置端口
 
+const pxtorem = require('postcss-pxtorem');
+
+
 module.exports = {
   // 配置服务器
   devServer: {
@@ -51,7 +54,8 @@ module.exports = {
     ]
   },
   resolve: {
-    extensions: [' ', '.js', '.jsx'],
+    modules: ['node_modules', path.join(__dirname, './node_modules')],
+    extensions: [' ', '.web.js', '.js', '.jsx', '.json'],
   },
   plugins: [
     new webpack.HotModuleReplacementPlugin(),
@@ -59,7 +63,11 @@ module.exports = {
     new webpack.LoaderOptionsPlugin({
       options: {
         postcss: function () {
-          return [autoprefixer]
+          return [autoprefixer,
+                  pxtorem({
+                    rootValue: 100,
+                    propWhiteList: []
+                  })]
         }
       }
     }),
