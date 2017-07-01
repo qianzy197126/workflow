@@ -5,6 +5,12 @@ import { NavBar, Icon } from 'antd-mobile'
 
 
 class MyNavbar extends Component {
+    constructor(props) {
+        super(props);
+        this.state = {
+
+        }
+    }
 
     render() {
         return (

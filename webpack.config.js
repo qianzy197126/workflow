@@ -6,6 +6,10 @@ const dflPort = 8080  //配置端口
 
 const pxtorem = require('postcss-pxtorem');
 
+const svgDirs = [
+  require.resolve('antd-mobile').replace(/warn\.js$/, '')
+];
+
 
 module.exports = {
   // 配置服务器
@@ -45,11 +49,22 @@ module.exports = {
         test: /\.less/,
         loaders: ['style-loader', 'css-loader', 'postcss-loader', 'less-loader']
       },
+      // {
+      //   test: /\.(png|jpg|gif|woff|woff2|svg)$/,
+      //   loaders: [
+      //     'url-loader?limit=10000&name=[hash:8].[name].[ext]',
+      //   ]
+      // },
       {
-        test: /\.(png|jpg|gif|woff|woff2|svg)$/,
+        test: /\.(png|jpg|gif|woff|woff2)$/,
         loaders: [
           'url-loader?limit=10000&name=[hash:8].[name].[ext]',
         ]
+      },
+      {
+        test:/\.(svg)$/i,
+        loaders: ['svg-sprite-loader'],
+        include: svgDirs //把svgDirs路劲下的所有svg文件交给svg-sprite-loader 插件处理
       }
     ]
   },
