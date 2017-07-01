@@ -3,6 +3,7 @@ import { hashHistory, Route, Router } from 'react-router'
 
 import AppComponent from './components/app'
 import MyButton from './components/Button'
+import MyNavbar from './components/MyNavbar'
 
 const RouterApp = () => (
   <Router history={hashHistory}>
@@ -10,6 +11,7 @@ const RouterApp = () => (
       {/*<IndexRoute component={}/>*/}
       <Route path="myButton" component={MyButton}></Route>
     </Route>
+    <Route path="/navbar" component={MyNavbar}></Route>
 
   </Router>
 )
