@@ -12,6 +12,7 @@ const RouterApp = () => (
       <Route path="myButton" component={MyButton}></Route>
     </Route>
     <Route path="/navbar" component={MyNavbar}></Route>
+    <Route path="/navbar2" component={MyNavbar}></Route>
 
   </Router>
 )
