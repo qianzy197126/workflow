@@ -7,9 +7,7 @@ import { NavBar, Icon } from 'antd-mobile'
 class MyNavbar extends Component {
     constructor(props) {
         super(props);
-        this.state = {
-
-        }
+        // this.props.navName = '处室副拟办';
     }
 
     render() {
@@ -22,7 +20,8 @@ class MyNavbar extends Component {
                     <Icon key="0" type="search" style={{ marginRight: '0.32rem' }} />,
                     <Icon key="1" type="ellipsis" />
                 ]}>
-                NavBar
+                {/*{props.navName}*/}
+                navbar
             </NavBar>
         </div>
         )
