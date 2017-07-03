@@ -1,0 +1,12 @@
+[
+    {
+        "department" : "事业部",
+        "departmentId" : "0001",
+        "staff" : [
+            {
+                "name" : "xiaoming",
+                "staffId" : "001"
+            }
+        ]
+    }
+]

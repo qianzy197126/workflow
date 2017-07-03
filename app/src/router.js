@@ -5,6 +5,7 @@ import AppComponent from './components/app'
 import MyButton from './components/Button'
 import MyNavbar from './components/MyNavbar'
 import MyStep from './components/MyStep/MyStep'
+import StaffModal from './components/StaffModal/StaffModal'
 
 const RouterApp = () => (
   <Router history={hashHistory}>
@@ -14,7 +15,7 @@ const RouterApp = () => (
     </Route>
     <Route path="/navbar" component={MyNavbar}></Route>
     <Route path="/navbar2" component={MyNavbar}> </Route>*/}
-    <Route path="/" component={MyStep}></Route>
+    <Route path="/" component={StaffModal}></Route>
 
   </Router>
 )
