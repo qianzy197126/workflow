@@ -152,7 +152,7 @@ class StaffModal extends Component {
             <Flex direction="row" justify="start">
                 <Flex.Item><span className="sm-title">下一步处理人：</span></Flex.Item>
                 <Flex.Item><span className="sm-name">{this.state.selected.length > 0 ? this.renderName() : '请选择人员'}</span></Flex.Item>
-                <Flex.Item><Button type="primary" inline size="large" onClick={this.showModal('modal')}>选择人员</Button></Flex.Item>
+                <Flex.Item><Button className="sm-btn" type="primary" inline size="large" onClick={this.showModal('modal')}>选择人员</Button></Flex.Item>
             </Flex>
 
             <Modal

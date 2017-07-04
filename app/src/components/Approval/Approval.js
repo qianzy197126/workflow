@@ -21,8 +21,7 @@ class Approval extends React.Component {
 			radio: {
 				value: -1,
 				label: ""
-			},
-			checkbox: [0, 0, 0]
+			}
 		}
 	}
 
@@ -42,10 +41,7 @@ class Approval extends React.Component {
 		});
 	};
 
-	oncheckboxChange = (val) => {
-		this.state.checkbox[val] = this.state.checkbox[val] === 1 ? 0 : 1;
-	}
-
+	
 	onClose = key => () => {
 		this.setState({
 			[key]: false
@@ -76,27 +72,21 @@ class Approval extends React.Component {
 			label: '同意发'
 		}];
 
-		const checkboxdata = [{
-			value: 0,
-			label: '邮件'
-		}, {
-			value: 1,
-			label: '短信'
-		}, {
-			value: 2,
-			label: '即时信息'
-		}];
+		
 
 		return (
 			<div className="approval">
-				<Flex>
-					<div className="title">审批意见：</div>
-					<Flex>
-						<Flex.Item>
-							<input type="text" className="approvalshow" disabled="disabled" placeholder="请选择审批意见" value={this.state.radio.label}/>
-						</Flex.Item>
-						<Button className="btn" type="primary" inline onClick={this.showModal('modal1')}>请选择</Button>
-					</Flex>
+				<Flex direction="row" justify="start">
+					<Flex.Item><span className="title">审批意见：</span></Flex.Item>
+					{/*<div className="title">审批意见：</div>*/}
+					<Flex.Item style={{flexShrink: 1}}> 
+						{/*<input type="text" className="approvalshow" disabled="disabled" placeholder="请选择审批意见" value={this.state.radio.label}/>*/}
+						<span className="approvalshow"> {this.state.radio.label ? this.state.radio.label : '请选择审批意见'}</span>
+					</Flex.Item>
+					<Flex.Item>
+						<Button className="btn" type="primary" inline size="large" onClick={this.showModal('modal1')}>请选择</Button>
+					</Flex.Item>
+					
 				</Flex>
 
 		        <Modal
@@ -117,31 +107,6 @@ class Approval extends React.Component {
 			        	})}
 				    </List>
 		        </Modal>
-
-	        	<Flex>
-	        		<div className="title">提醒办理：</div>
-	        		<List>
-	        			{checkboxdata.map((item, index) => {
-				        	return (<CheckboxItem key={index} onChange={() => this.oncheckboxChange(item.value)}>
-				            	{item.label}
-				            </CheckboxItem>)
-				        })}
-	        		</List>
-	        	</Flex>
-
-		        <WhiteSpace size="lg" />
-		      	<Flex>
-					<Flex.Item>
-		      		</Flex.Item>
-		      		<Flex.Item>
-		        		<Button type="primary">确认</Button>
-		        	</Flex.Item>
-		        	<Flex.Item>
-		        		<Button type="ghost">返回</Button>
-		        	</Flex.Item>
-		        	<Flex.Item>
-		      		</Flex.Item>
-		      	</Flex>
 			</div>
 		);
 	}

@@ -15,6 +15,7 @@ import CardList from './CardList/CardList'
 import StaffModal from './StaffModal/StaffModal'
 import Approval from './Approval/Approval'
 import MyStep from './MyStep/MyStep'
+import RemindManagement from './RemindManagement/RemindManagement'
 import './app.less'
 
 class AppComponent extends Component {
@@ -52,6 +53,7 @@ class AppComponent extends Component {
               <List>
                 <List.Item><StaffModal/></List.Item>
                 <List.Item><Approval/></List.Item>
+                <List.Item><RemindManagement/></List.Item>
                 {/*<List.Item><Approval/></List.Item>*/}
               </List>
             </Flex.Item>
