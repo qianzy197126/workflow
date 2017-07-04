@@ -51,7 +51,7 @@ class AppComponent extends Component {
             <Flex.Item>
               <List>
                 <List.Item><StaffModal/></List.Item>
-                <List.Item><StaffModal/></List.Item>
+                <List.Item><Approval/></List.Item>
                 {/*<List.Item><Approval/></List.Item>*/}
               </List>
             </Flex.Item>

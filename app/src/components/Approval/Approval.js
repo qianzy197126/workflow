@@ -89,17 +89,16 @@ class Approval extends React.Component {
 
 		return (
 			<div className="approval">
-				<List.Item>
+				<Flex>
+					<div className="title">审批意见：</div>
 					<Flex>
-						<div className="title">审批意见：</div>
-						<Flex>
-							<Flex.Item>
-								<input type="text" className="approvalshow" disabled="disabled" placeholder="请选择审批意见" value={this.state.radio.label}/>
-							</Flex.Item>
-							<Button className="btn" type="primary" inline onClick={this.showModal('modal1')}>请选择</Button>
-						</Flex>
+						<Flex.Item>
+							<input type="text" className="approvalshow" disabled="disabled" placeholder="请选择审批意见" value={this.state.radio.label}/>
+						</Flex.Item>
+						<Button className="btn" type="primary" inline onClick={this.showModal('modal1')}>请选择</Button>
 					</Flex>
-				</List.Item>
+				</Flex>
+
 		        <Modal
 		          title="请选择审批意见"
 		          transparent
@@ -119,18 +118,16 @@ class Approval extends React.Component {
 				    </List>
 		        </Modal>
 
-		        <List.Item>
-		        	<Flex>
-		        		<div className="title">提醒办理：</div>
-		        		<List>
-		        			{checkboxdata.map((item, index) => {
-					        	return (<CheckboxItem key={index} onChange={() => this.oncheckboxChange(item.value)}>
-					            	{item.label}
-					            </CheckboxItem>)
-					        })}
-		        		</List>
-		        	</Flex>
-		        </List.Item>
+	        	<Flex>
+	        		<div className="title">提醒办理：</div>
+	        		<List>
+	        			{checkboxdata.map((item, index) => {
+				        	return (<CheckboxItem key={index} onChange={() => this.oncheckboxChange(item.value)}>
+				            	{item.label}
+				            </CheckboxItem>)
+				        })}
+	        		</List>
+	        	</Flex>
 
 		        <WhiteSpace size="lg" />
 		      	<Flex>
