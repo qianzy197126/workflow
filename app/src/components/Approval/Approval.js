@@ -3,21 +3,26 @@ import {
 	Modal,
 	Button,
 	WhiteSpace,
-	WingBlank,
 	Radio,
 	List,
-	InputItem
+	InputItem,
+	Flex,
+	Checkbox
 } from 'antd-mobile';
 import './approval.less';
 
 const RadioItem = Radio.RadioItem;
+const CheckboxItem = Checkbox.CheckboxItem;
 class Approval extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
 			modal1: false,
-			value: -1,
-			label: ""
+			radio: {
+				value: -1,
+				label: ""
+			},
+			checkbox: [0, 0, 0]
 		}
 	}
 
@@ -30,10 +35,16 @@ class Approval extends React.Component {
 
 	onChange = (value, label) => {
 		this.setState({
-			value,
-			label
+			radio: {
+				value: value,
+				label: label
+			}
 		});
 	};
+
+	oncheckboxChange = (val) => {
+		this.state.checkbox[val] = this.state.checkbox[val] === 1 ? 0 : 1;
+	}
 
 	onClose = key => () => {
 		this.setState({
@@ -64,19 +75,31 @@ class Approval extends React.Component {
 			value: 6,
 			label: '同意发'
 		}];
+
+		const checkboxdata = [{
+			value: 0,
+			label: '邮件'
+		}, {
+			value: 1,
+			label: '短信'
+		}, {
+			value: 2,
+			label: '即时信息'
+		}];
+
 		return (
 			<div className="approval">
-				<WhiteSpace />
-				<div className="cardcontent">
-					<div className="carditem">
+				<List.Item>
+					<Flex>
 						<div className="title">审批意见：</div>
-						<div className="content">
-							<input type="text" className="approvalshow" disabled="disabled" value={this.state.label}/>
+						<Flex>
+							<Flex.Item>
+								<input type="text" className="approvalshow" disabled="disabled" placeholder="请选择审批意见" value={this.state.radio.label}/>
+							</Flex.Item>
 							<Button className="btn" type="primary" inline onClick={this.showModal('modal1')}>请选择</Button>
-						</div>
-					</div>
-				</div>
-		        <WhiteSpace />
+						</Flex>
+					</Flex>
+				</List.Item>
 		        <Modal
 		          title="请选择审批意见"
 		          transparent
@@ -88,13 +111,40 @@ class Approval extends React.Component {
 			        <List>
 			        	{data.map((item, index) => {
 							return (
-								<RadioItem key={index} checked={this.state.value === item.value} onChange={() => this.onChange(item.value, item.label)}>
+								<RadioItem key={index} checked={this.state.radio.value === item.value} onChange={() => this.onChange(item.value, item.label)}>
 									{item.label}
 				        		</RadioItem>
 				        	);
 			        	})}
 				    </List>
 		        </Modal>
+
+		        <List.Item>
+		        	<Flex>
+		        		<div className="title">提醒办理：</div>
+		        		<List>
+		        			{checkboxdata.map((item, index) => {
+					        	return (<CheckboxItem key={index} onChange={() => this.oncheckboxChange(item.value)}>
+					            	{item.label}
+					            </CheckboxItem>)
+					        })}
+		        		</List>
+		        	</Flex>
+		        </List.Item>
+
+		        <WhiteSpace size="lg" />
+		      	<Flex>
+					<Flex.Item>
+		      		</Flex.Item>
+		      		<Flex.Item>
+		        		<Button type="primary">确认</Button>
+		        	</Flex.Item>
+		        	<Flex.Item>
+		        		<Button type="ghost">返回</Button>
+		        	</Flex.Item>
+		        	<Flex.Item>
+		      		</Flex.Item>
+		      	</Flex>
 			</div>
 		);
 	}

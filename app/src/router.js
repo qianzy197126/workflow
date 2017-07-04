@@ -5,11 +5,7 @@ import {
 	Router
 } from 'react-router'
 
-import AppComponent from './components/app'
-import MyButton from './components/Button'
-import MyNavbar from './components/MyNavbar'
-import MyStep from './components/MyStep/MyStep'
-import StaffModal from './components/StaffModal/StaffModal'
+import App from './components/app'
 
 const RouterApp = () => (
 	<Router history={hashHistory}>
@@ -19,7 +15,7 @@ const RouterApp = () => (
     </Route>
     <Route path="/navbar" component={MyNavbar}></Route>
     <Route path="/navbar2" component={MyNavbar}> </Route>*/}
-    <Route path="/" component={StaffModal}></Route>
+    <Route path="/" component={App}></Route>
 
   </Router>
 )

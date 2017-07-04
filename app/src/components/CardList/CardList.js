@@ -2,7 +2,8 @@ import React from 'react';
 import {
 	WhiteSpace,
 	Accordion,
-	List
+	List,
+	Flex
 } from 'antd-mobile';
 import './cardList.less';
 import json from './list.json';
@@ -18,68 +19,85 @@ class CardList extends React.Component {
 	render() {
 		return (
 			<div className="cardlist">
-				<div className="cardcontent">
-					<div className="carditem">
+				<List.Item>
+					<Flex>
 						<div className="title">拟稿部门：</div>
 						<div className="content">{this.state.data.department}</div>
-					</div>
-					<div className="carditem">
-						<div className="couple">
-							<div className="title">拟稿人：</div>
-							<div className="content">{this.state.data.drafter}</div>
-						</div>
-						<div className="couple">
-							<div className="title">核稿人：</div>
-							<div className="content">{this.state.data.draftnuclear}</div>
-						</div>
-					</div>
-				</div>
+					</Flex>
+				</List.Item>
+
+				<List.Item>
+					<Flex>
+						<Flex.Item>
+							<Flex>
+								<div className="title">拟稿人：</div>
+								<div className="content">{this.state.data.drafter}</div>
+							</Flex>
+						</Flex.Item>
+						<Flex.Item>
+							<Flex>
+								<div className="title">核稿人：</div>
+								<div className="content">{this.state.data.draftnuclear}</div>
+							</Flex>
+						</Flex.Item>
+					</Flex>
+				</List.Item>
 
 				<WhiteSpace size="lg" />
+				<List.Item>
+					<Flex>
+						<Flex.Item>
+							<Flex>
+								<div className="title">主送：</div>
+								<div className="content">{this.state.data.mainsending}</div>
+							</Flex>
+						</Flex.Item>
+						<Flex.Item>
+							<Flex>
+								<div className="title">抄送：</div>
+								<div className="content">{this.state.data.copysending}</div>
+							</Flex>
+						</Flex.Item>
+					</Flex>
+				</List.Item>
 
-				<div className="cardcontent">
-					<div className="carditem">
-						<div className="couple">
-							<div className="title">主送：</div>
-							<div className="content">{this.state.data.mainsending}</div>
-						</div>
-						<div className="couple">
-							<div className="title">抄送：</div>
-							<div className="content">{this.state.data.copysending}</div>
-						</div>
-					</div>
-					<div className="carditem">
+				<List.Item>
+					<Flex>
 						<div className="title">发文单位：</div>
 						<div className="content">{this.state.data.units.unitsdepartment}</div>
-					</div>
-					<div className="carditem">
+					</Flex>
+				</List.Item>
+
+				<List.Item>
+					<Flex>
 						<div className="title">公文正文：</div>
 						<div className="content">{this.state.data.units.unitsfilename}</div>
-					</div>
-					<Accordion accordion openAnimation={{}} className="my-accordion">
-				        <Accordion.Panel header={
-				        	<div className="intitle">
-				        		<div className="title">公文附件：</div>
-								<div className="content">便函544号.pdf</div>
-				        	</div>
-				        }>
-				            <List className="my-list">
-				            	{this.state.data.units.attachment.map((item,index) =>{
-				            		return (<List.Item key={index}>{item.name}</List.Item>)
-				           		})}
-				            </List>
-				        </Accordion.Panel>
-				    </Accordion>
-				</div>
+					</Flex>
+				</List.Item>
+
+				<Accordion accordion openAnimation={{}} className="my-accordion">
+			        <Accordion.Panel header={
+							<Flex>
+								<div className="title">公文附件：</div>
+								<div className="content">便函554号.pdf</div>
+							</Flex>
+			        }>
+			            <List className="my-list">
+			            	{this.state.data.units.attachment.map((item,index) =>{
+			            		return (<List.Item key={index}>{item.name}</List.Item>)
+			           		})}
+			            </List>
+			        </Accordion.Panel>
+			    </Accordion>
 
 				<WhiteSpace size="lg" />
 
-				<div className="cardcontent">
-					<div className="carditem">
+				<List.Item>
+					<Flex>
 						<div className="title">审核步骤：</div>
 						<div className="content">{this.state.data.steps[0].name}</div>
-					</div>
-				</div>
+					</Flex>
+				</List.Item>
 			</div>
 		);
 	}
