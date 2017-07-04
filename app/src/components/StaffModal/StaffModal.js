@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Button, WhiteSpace, WingBlank, Toast, SearchBar, Accordion, List, Checkbox} from 'antd-mobile'
+import { Modal, Button, WhiteSpace, WingBlank, Toast, SearchBar, Accordion, List, Checkbox, Flex} from 'antd-mobile'
 import './StaffModal.less'
 
 const alert = Modal.alert
@@ -125,7 +125,12 @@ class StaffModal extends Component {
 
     return (
         <div>
-            <Button type="primary" inline size="large" onClick={this.showModal('modal')}>选择人员</Button>
+            <Flex direction="row" justify="start">
+                <Flex.Item><span className="sm-title">下一步处理人：</span></Flex.Item>
+                <Flex.Item><span className="sm-name">请选择人员</span></Flex.Item>
+                <Flex.Item><Button type="primary" inline size="large" onClick={this.showModal('modal')}>选择人员</Button></Flex.Item>
+            </Flex>
+
             <Modal
                 transparent
                 maskClosable={false}

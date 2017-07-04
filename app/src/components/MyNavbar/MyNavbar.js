@@ -20,8 +20,8 @@ class MyNavbar extends Component {
                     <Icon key="0" type="search" style={{ marginRight: '0.32rem' }} />,
                     <Icon key="1" type="ellipsis" />
                 ]}>
-                {/*{props.navName}*/}
-                navbar
+                {this.props.navName}
+                {/*navbar*/}
             </NavBar>
         </div>
         )
