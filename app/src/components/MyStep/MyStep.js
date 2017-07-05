@@ -12,19 +12,16 @@ const finishSvg = <Icon type={require('../../images/step/finish.svg')} />
 class MyStep extends Component {
     constructor(props) {
         super(props);
-        console.log(json);
     }
 
     rendItem(){
         let waitItem = json.wait;
         let count = 0;
         let insertWait = [<Step key={count++} status="error" title={waitItem.title} icon={waitSvg} description={waitItem.time}/>];
-        console.log(insertWait);
         let finishItems = json.finish;
         let insertFinish = finishItems.map((item) => {
             return <Step key={count++} status="finish" title={item.title} icon={finishSvg} description={item.time}/>;
         });
-        console.log(insertFinish);
 
         // let insert = insertWait.push.apply(insertWait, insertFinish);
         // console.log(insert);

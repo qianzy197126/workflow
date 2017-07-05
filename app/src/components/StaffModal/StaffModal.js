@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Modal, Button, WhiteSpace, WingBlank, Toast, SearchBar, Accordion, List, Checkbox} from 'antd-mobile'
+import { Modal, Button, WhiteSpace, WingBlank, Toast, SearchBar, Accordion, List, Checkbox, Flex} from 'antd-mobile'
 import './StaffModal.less'
 
 const alert = Modal.alert
@@ -24,7 +24,8 @@ class StaffModal extends Component {
     super(props);
     this.state = {
       modal: false,
-      selected: []
+      selected: [],
+      selectedName: [],
     };
   }
   showModal = key => (e) => {
@@ -42,32 +43,46 @@ class StaffModal extends Component {
   }
 
   onChange = (key) => {
-    console.log(key);
   }
 
-  onSelectChange = (key) => {
+  onSelectChange = (key, name) => {
     //通过员工id进行员工选择状态的转换
 
     let selected = this.state.selected.concat();
+    let selectedName = this.state.selectedName.concat();
+    let count = 0;
+    let deleteIndex = 0;
 
     if(hasSelected(key, selected)) {
         selected = selected.filter((item)=>{
-            return item !== key;
+            count++;
+            if(item !== key) {
+                return true;
+            }else {
+                deleteIndex = count;
+                return false;
+            }   
         })
+        count = 0;
+        selectedName = selectedName.filter(() => {
+            count++;
+            return count !== deleteIndex;
+        });
     }else {
         selected.push(key);
+        selectedName.push(name);
     }
 
     this.setState({
-        selected: selected
+        selected: selected,
+        selectedName: selectedName
     }, ()=> {
-        console.log(this.state);                
+
     });
 
-    
     // console.log(key);
     // let selected = this.state.selected.concat();
-    
+
     // debugger
     // if(selected[key]) {
     //     debugger
@@ -75,7 +90,7 @@ class StaffModal extends Component {
     // }else {
     //     selected[key] = key;
     // }
-    // console.log(selected);
+        // console.log(selected);
     // this.setState({
     //     selected: selected
     // }, function() {
@@ -89,7 +104,7 @@ class StaffModal extends Component {
     if(key == 'change') {
         sel = 1;
     }else {
-
+        sel = 0;
     }
     // this.setState();
     this.forceUpdate();
@@ -99,7 +114,6 @@ class StaffModal extends Component {
     let data;
     if(sel == 0) {
         data = json;
-        console.log(json);
     }else {
         data = searchJson;
     }
@@ -109,7 +123,8 @@ class StaffModal extends Component {
                 <List className="sm-list">
                     {item.staff.map(staff => {
                         return (
-                            <CheckboxItem key={staff.staffId} checked={hasSelected(staff.staffId, this.state.selected)} onChange={() => this.onSelectChange(staff.staffId)}>
+                            <CheckboxItem key={staff.staffId} checked={hasSelected(staff.staffId, this.state.selected)} 
+                                onChange={() => this.onSelectChange(staff.staffId, staff.name)}>
                                 {staff.name}
                             </CheckboxItem>
                         )
@@ -121,19 +136,30 @@ class StaffModal extends Component {
     return insert;
   }
 
+  renderName() {
+    let selectedName = this.state.selectedName.concat();
+    let nameStr = selectedName.join(',');
+    return nameStr;
+  }
+
   render() {
 
     return (
         <div>
-            <Button type="primary" inline size="large" onClick={this.showModal('modal')}>选择人员</Button>
+            <Flex direction="row" justify="start">
+                <Flex.Item><span className="sm-title">下一步处理人：</span></Flex.Item>
+                <Flex.Item><span className="sm-name">{this.state.selected.length > 0 ? this.renderName() : '请选择人员'}</span></Flex.Item>
+                <Flex.Item><Button className="sm-btn" type="primary" inline size="large" onClick={this.showModal('modal')}>选择人员</Button></Flex.Item>
+            </Flex>
+
             <Modal
                 transparent
                 maskClosable={false}
                 visible={this.state.modal}
                 onClose={this.onClose('modal')}
                 footer={[
-                    { text: '取消', onPress: () => { console.log('cancel'); this.onClose('modal')(); } },
-                    { text: '确定', onPress: () => { console.log('ok'); this.onClose('modal')(); } }
+                    { text: '取消', onPress: () => { this.setState({selected: [], selectedName: []}); this.onClose('modal')(); } },
+                    { text: '确定', onPress: () => { this.onClose('modal')(); } }
                     ]}
                 style={{width: '90%'} }
                 >

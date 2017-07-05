@@ -3,21 +3,25 @@ import {
 	Modal,
 	Button,
 	WhiteSpace,
-	WingBlank,
 	Radio,
 	List,
-	InputItem
+	InputItem,
+	Flex,
+	Checkbox
 } from 'antd-mobile';
 import './approval.less';
 
 const RadioItem = Radio.RadioItem;
+const CheckboxItem = Checkbox.CheckboxItem;
 class Approval extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
-			modal1: false,
-			value: -1,
-			label: ""
+			modal: false,
+			radio: {
+				value: -1,
+				label: ""
+			}
 		}
 	}
 
@@ -30,10 +34,13 @@ class Approval extends React.Component {
 
 	onChange = (value, label) => {
 		this.setState({
-			value,
-			label
+			radio: {
+				value: value,
+				label: label
+			}
 		});
 	};
+
 
 	onClose = key => () => {
 		this.setState({
@@ -64,31 +71,33 @@ class Approval extends React.Component {
 			value: 6,
 			label: '同意发'
 		}];
+
 		return (
 			<div className="approval">
-				<WhiteSpace />
-				<div className="cardcontent">
-					<div className="carditem">
-						<div className="title">审批意见：</div>
-						<div className="content">
-							<input type="text" className="approvalshow" disabled="disabled" value={this.state.label}/>
-							<Button className="btn" type="primary" inline onClick={this.showModal('modal1')}>请选择</Button>
-						</div>
-					</div>
-				</div>
-		        <WhiteSpace />
+				<Flex direction="row" justify="start">
+					<Flex.Item><span className="title">审批意见：</span></Flex.Item>
+					{/*<div className="title">审批意见：</div>*/}
+					<Flex.Item style={{flexShrink: 1}}>
+						{/*<input type="text" className="approvalshow" disabled="disabled" placeholder="请选择审批意见" value={this.state.radio.label}/>*/}
+						<span className="approvalshow"> {this.state.radio.label ? this.state.radio.label : '请选择审批意见'}</span>
+					</Flex.Item>
+					<Flex.Item>
+						<Button className="btn" type="primary" inline size="large" onClick={this.showModal('modal')}>选择意见</Button>
+					</Flex.Item>
+				</Flex>
+
 		        <Modal
 		          title="请选择审批意见"
 		          transparent
 		          maskClosable={false}
-		          visible={this.state.modal1}
-		          onClose={this.onClose('modal1')}
-		          footer={[{ text: '确定', onPress: () => { this.onClose('modal1')(); } }]}
+		          visible={this.state.modal}
+		          onClose={this.onClose('modal')}
+		          footer={[{ text: '确定', onPress: () => { this.onClose('modal')(); } }]}
 		        >
 			        <List>
 			        	{data.map((item, index) => {
 							return (
-								<RadioItem key={index} checked={this.state.value === item.value} onChange={() => this.onChange(item.value, item.label)}>
+								<RadioItem key={index} checked={this.state.radio.value === item.value} onChange={() => this.onChange(item.value, item.label)}>
 									{item.label}
 				        		</RadioItem>
 				        	);
