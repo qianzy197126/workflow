@@ -21,11 +21,11 @@
 	},
 	"steps": [{
 		"name": "处理代办是想",
-		"value": "1",
+		"value": 1,
 		"choic": "2"
 	}, {
 		"name": "dd",
-		"value": "1",
+		"value": 2,
 		"choic": "2"
 	}]
 }

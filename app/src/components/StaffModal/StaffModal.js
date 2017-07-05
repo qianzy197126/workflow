@@ -43,7 +43,6 @@ class StaffModal extends Component {
   }
 
   onChange = (key) => {
-    console.log(key);
   }
 
   onSelectChange = (key, name) => {
@@ -78,13 +77,12 @@ class StaffModal extends Component {
         selected: selected,
         selectedName: selectedName
     }, ()=> {
-        console.log(this.state);                
+
     });
 
-    
     // console.log(key);
     // let selected = this.state.selected.concat();
-    
+
     // debugger
     // if(selected[key]) {
     //     debugger
@@ -92,7 +90,7 @@ class StaffModal extends Component {
     // }else {
     //     selected[key] = key;
     // }
-    // console.log(selected);
+        // console.log(selected);
     // this.setState({
     //     selected: selected
     // }, function() {
@@ -116,7 +114,6 @@ class StaffModal extends Component {
     let data;
     if(sel == 0) {
         data = json;
-        console.log(json);
     }else {
         data = searchJson;
     }
@@ -161,8 +158,8 @@ class StaffModal extends Component {
                 visible={this.state.modal}
                 onClose={this.onClose('modal')}
                 footer={[
-                    { text: '取消', onPress: () => { console.log('cancel'); this.setState({selected: [], selectedName: []}); this.onClose('modal')(); } },
-                    { text: '确定', onPress: () => { console.log('ok'); this.onClose('modal')(); } }
+                    { text: '取消', onPress: () => { this.setState({selected: [], selectedName: []}); this.onClose('modal')(); } },
+                    { text: '确定', onPress: () => { this.onClose('modal')(); } }
                     ]}
                 style={{width: '90%'} }
                 >

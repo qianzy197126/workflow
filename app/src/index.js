@@ -3,6 +3,6 @@ import ReactDOM from 'react-dom'
 import RouterApp from './router'
 
 ReactDOM.render(
-  <RouterApp />,
-  document.getElementById('app')
+	<RouterApp />,
+	document.getElementById('app')
 )
