@@ -24,10 +24,36 @@ class StaffModal extends Component {
     super(props);
     this.state = {
       modal: false,
+      data: [],
       selected: [],
-      selectedName: [],
+      selectedName: []
     };
   }
+  
+  componentWillMount() {
+
+  }
+
+  componentDidMount() {
+    Toast.loading('loading...');
+
+    let jsonData = [];
+    fetch('http://222.198.39.20:8080/MOA/departmentTree.do?depID=1247027&fullName=',{
+        method: 'GET'
+    }).then((response) => {
+        return response.json();
+    }).then(data => {
+        jsonData = JSON.parse(data);
+    }).catch(() => {
+        alert('获取数据存在问题');
+    });
+
+    this.setState({
+        data: jsonData
+    }, ()=> Toast.hide());
+  }
+
+
   showModal = key => (e) => {
     // 现象：如果弹出的弹框上的 x 按钮的位置、和手指点击 button 时所在的位置「重叠」起来，
     // 会触发 x 按钮的点击事件而导致关闭弹框 (注：弹框上的取消/确定等按钮遇到同样情况也会如此)
