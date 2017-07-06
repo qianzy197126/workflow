@@ -9,8 +9,6 @@ import json from './Mock.json'
 import searchJson from './MockSearch.json'
 
 
-let sel = 0;
-
 
 
 const hasSelected = (key, arr) => {
@@ -24,10 +22,38 @@ class StaffModal extends Component {
     super(props);
     this.state = {
       modal: false,
+      data: [],
       selected: [],
-      selectedName: [],
+      selectedName: []
     };
   }
+
+  componentDidMount() {
+    this.fetchData();
+  }
+
+
+  //用于获取远程数据
+  fetchData(name) {
+    let _this = this;
+    let fullName = name ? name : '';
+    console.log("fullName " + fullName);
+    fetch('http://222.198.39.20:8080/MOA/departmentTree.do?depID=1247027&fullName=' + fullName,{
+        method: 'GET'
+    }).then((response) => {
+        return response.json();
+    }).then(data => {
+        console.log(JSON.parse(data));
+        _this.setState({
+            data: JSON.parse(data)
+        });
+    }).catch((err) => {
+        console.log(err);
+        alert('获取数据存在问题');
+    });
+  }
+
+
   showModal = key => (e) => {
     // 现象：如果弹出的弹框上的 x 按钮的位置、和手指点击 button 时所在的位置「重叠」起来，
     // 会触发 x 按钮的点击事件而导致关闭弹框 (注：弹框上的取消/确定等按钮遇到同样情况也会如此)
@@ -101,31 +127,22 @@ class StaffModal extends Component {
   }
 
   onSearchChange = (key) => {
-    if(key == 'change') {
-        sel = 1;
-    }else {
-        sel = 0;
-    }
     // this.setState();
-    this.forceUpdate();
+    // this.forceUpdate();
+    this.fetchData(key);
   }
 
   renderItem = () => {
-    let data;
-    if(sel == 0) {
-        data = json;
-    }else {
-        data = searchJson;
-    }
+    let data = this.state.data;
     let insert = data.map(item => {
         return (
-            <Accordion.Panel key={item.departmentId} header={item.department} className="pad">
+            <Accordion.Panel key={item.id} header={item.text} className="pad">
                 <List className="sm-list">
-                    {item.staff.map(staff => {
+                    {item.children.map(staff => {
                         return (
-                            <CheckboxItem key={staff.staffId} checked={hasSelected(staff.staffId, this.state.selected)} 
-                                onChange={() => this.onSelectChange(staff.staffId, staff.name)}>
-                                {staff.name}
+                            <CheckboxItem key={staff.id} checked={hasSelected(staff.id, this.state.selected)} 
+                                onChange={() => this.onSelectChange(staff.id, staff.text)}>
+                                {staff.text}
                             </CheckboxItem>
                         )
                     })}
