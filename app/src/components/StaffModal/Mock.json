@@ -1,0 +1,30 @@
+[
+    {
+        "department" : "事业部",
+        "departmentId" : "0001",
+        "staff" : [
+            {
+                "name" : "xiaoming",
+                "staffId" : "001"
+            },
+            {
+                "name" : "xiaogang",
+                "staffId" : "002"
+            }
+        ]
+    },
+    {
+        "department" : "开发部",
+        "departmentId" : "0002",
+        "staff" : [
+            {
+                "name" : "xiaohong",
+                "staffId" : "003"
+            },
+            {
+                "name" : "xiaohuang",
+                "staffId" : "004"
+            }
+        ]
+    }
+]

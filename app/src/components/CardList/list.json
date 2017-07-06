@@ -1,0 +1,31 @@
+{
+	"department": "办公室",
+	"drafter": "叶太霞",
+	"draftnuclear": "钟飞龙",
+	"mainsending": "",
+	"copysending": "",
+	"units": {
+		"unitsdepartment": "重庆市交通委会",
+		"unitsfilename": "渝交委便函[2017] 544号.pdf",
+		"unitsurl": "xxxxxxxxxx",
+		"attachment": [{
+			"name": "便函544号_1.pdf",
+			"url": "xxxxxxx"
+		}, {
+			"name": "便函544号_2.pdf",
+			"url": "xxxxxxx"
+		}, {
+			"name": "便函544号_3.pdf",
+			"url": "xxxxxxx"
+		}]
+	},
+	"steps": [{
+		"name": "处理代办是想",
+		"value": 1,
+		"choic": "2"
+	}, {
+		"name": "dd",
+		"value": 2,
+		"choic": "2"
+	}]
+}

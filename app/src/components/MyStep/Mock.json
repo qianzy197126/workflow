@@ -1,0 +1,32 @@
+{
+    "wait" : {
+        "title" : "My Title",
+        "time" : "2017 01 01"
+    },
+    "finish" : [
+        {
+            "title" : "My Title",
+            "time" : "2017 01 01"   
+        },
+        {
+            "title" : "My Title",
+            "time" : "2017 01 01"   
+        },
+        {
+            "title" : "My Title",
+            "time" : "2017 01 01"   
+        },
+        {
+            "title" : "My Title",
+            "time" : "2017 01 01"   
+        },
+        {
+            "title" : "My Title",
+            "time" : "2017 01 01"   
+        },
+        {
+            "title" : "My Title",
+            "time" : "2017 01 01"   
+        }
+    ]
+}

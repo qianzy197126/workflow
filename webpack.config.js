@@ -7,9 +7,10 @@ const dflPort = 8080  //配置端口
 const pxtorem = require('postcss-pxtorem');
 
 const svgDirs = [
-  require.resolve('antd-mobile').replace(/warn\.js$/, '')
+  require.resolve('antd-mobile').replace(/warn\.js$/, ''),
+  path.resolve(__dirname, 'app/src/images')
 ];
-
+console.log(path.resolve(__dirname, 'src/images'));
 
 module.exports = {
   // 配置服务器
