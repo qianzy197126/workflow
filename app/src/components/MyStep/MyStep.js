@@ -12,15 +12,30 @@ const finishSvg = <Icon type={require('../../images/step/finish.svg')} />
 class MyStep extends Component {
     constructor(props) {
         super(props);
+        this.state = {
+            waitData: {},
+            data: []
+        }
     }
 
+
+
     rendItem(){
-        let waitItem = json.wait;
+        
         let count = 0;
-        let insertWait = [<Step key={count++} status="error" title={waitItem.title} icon={waitSvg} description={waitItem.time}/>];
-        let finishItems = json.finish;
-        let insertFinish = finishItems.map((item) => {
-            return <Step key={count++} status="finish" title={item.title} icon={finishSvg} description={item.time}/>;
+        let insertWait;
+        if(this.state.waitData) {
+            insertWait = [<Step key={count++} status="error" title={this.state.waitData.tackName} icon={waitSvg} 
+                                description={"未确认 " + this.state.waitData.creator}/>];
+        }else {
+            insertWait = [<Step key={count++} status="error" icon={waitSvg}/>];
+        }
+
+
+        
+        let insertFinish = this.state.data.map((item) => {
+            return <Step key={count++} status="finish" title={item.ACTIVITYNAME} icon={finishSvg} 
+                description={item.CREATETIME + " " + item.CREATORNAME}/>;
         });
 
         // let insert = insertWait.push.apply(insertWait, insertFinish);
@@ -28,6 +43,43 @@ class MyStep extends Component {
 
         let insert = insertWait.concat(insertFinish);
         return insert;
+        
+    }
+
+    componentDidMount() {
+        this.fetchData('8976290');
+    }
+
+    fetchData(runID) {
+        fetch('http://222.198.39.25:8181/MOA/getWaitingMatterInfoByID.do?runID=8976290', {
+            method: 'GET'
+        }).then((response) => {
+            return response.json();
+        }).then((data) => {
+            data = JSON.parse(data);
+            let waitData = {
+                creator: data.CREATOR,
+                tackName: data.TASKNAME,
+                reviewUserName: data.REVIEW_USER_NAME
+            };
+            
+
+            let id = runID ? runID : '';
+            fetch('http://222.198.39.25:8181/MOA/getProcess.do?runID=' + runID, {
+                method: 'GET'
+            }).then((response) => {
+                return response.json();
+            }).then((data) => {
+                // console.log(this);
+                this.setState({
+                    waitData: waitData,
+                    data: JSON.parse(data)
+                });
+            }).catch((err) => {
+                console.log(err);
+            });
+        })
+
         
     }
 
