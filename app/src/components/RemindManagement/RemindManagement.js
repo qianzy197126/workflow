@@ -39,24 +39,36 @@ class RemindManagement extends Component {
                 <List>
                     {checkboxdata.map((item, index) => {
                         return (<CheckboxItem key={index} onChange={() => this.oncheckboxChange(item.value)}>
-                            {item.label}
+                            <span>{item.label}</span>
                         </CheckboxItem>)
                     })}
                 </List>
             </Flex>
 
             <WhiteSpace size="lg" />
-            <Flex>
-                <Flex.Item>
+            <Flex justify="start">
+                <Flex.Item style={{
+                    flex: 1
+                }}>
                 </Flex.Item>
-                <Flex.Item>
+                <Flex.Item style={{
+                    flex : 4
+                }}>
                     <Button type="primary">确认</Button>
                 </Flex.Item>
-                <Flex.Item>
+                <Flex.Item style={{
+                    flex: 1
+                }}> 
+                </Flex.Item>
+                <Flex.Item style={{
+                    flex : 4
+                }}>
                     <Button type="ghost">返回</Button>
                 </Flex.Item>
-                <Flex.Item>
-                </Flex.Item>
+                <Flex.Item style={{
+                    flex: 1
+                }}></Flex.Item>
+            
             </Flex>
         </div>)
     }

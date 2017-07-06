@@ -51,7 +51,7 @@ class MyStep extends Component {
     }
 
     fetchData(runID) {
-        fetch('http://222.198.39.25:8181/MOA/getWaitingMatterInfoByID.do?runID=8976290', {
+        fetch('http://222.198.39.25:8080/MOA/getWaitingMatterInfoByID.do?runID=8976290', {
             method: 'GET'
         }).then((response) => {
             return response.json();
@@ -65,7 +65,7 @@ class MyStep extends Component {
             
 
             let id = runID ? runID : '';
-            fetch('http://222.198.39.25:8181/MOA/getProcess.do?runID=' + runID, {
+            fetch('http://222.198.39.25:8080/MOA/getProcess.do?runID=' + runID, {
                 method: 'GET'
             }).then((response) => {
                 return response.json();

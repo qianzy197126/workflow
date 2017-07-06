@@ -38,7 +38,7 @@ class StaffModal extends Component {
     let _this = this;
     let fullName = name ? name : '';
     console.log("fullName " + fullName);
-    fetch('http://222.198.39.20:8080/MOA/departmentTree.do?depID=1247027&fullName=' + fullName,{
+    fetch('http://222.198.39.25:8080/MOA/departmentTree.do?depID=1247027&fullName=' + fullName,{
         method: 'GET'
     }).then((response) => {
         return response.json();
