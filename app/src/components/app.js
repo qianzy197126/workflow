@@ -4,15 +4,16 @@
 import React, { Component } from 'react'
 import { Link } from 'react-router'
 
+// import logo from '../images/logo.svg'
+import MyNeedDealt from '../components/MyNeedDealt/MyNeedDealt.js'
+import MyNavbar from './MyNavbar.js'
+
+import { NavBar, Icon } from 'antd-mobile'
 import { Card, WingBlank, WhiteSpace } from 'antd-mobile';
-import logo from '../images/logo.svg'
-import Welcome from '../welcome/Welcome'
-import ToDo from '../components/todo/toDo'
-import MyNeedDealt from '../components/MyNeedDealt/MyNeedDealt'
 import './app.less'
-
-
 class AppComponent extends Component {
+
+  
   render () {
     return (
       <div className="App">
@@ -21,16 +22,12 @@ class AppComponent extends Component {
           {/*<img src={logo} className="App-logo" alt="logo" />*/}
           <h2>Welcome to React</h2>
         </div>
-        <p className="App-intro">
-          <Link to="demo">
-            欢迎使用!请查看代码，结合自己所学知识开始你的React之旅！
-          </Link>
-        </p>
+
         {this.props.children}
+        
       </div>
     )
   }
 }
-
 
 export default AppComponent
