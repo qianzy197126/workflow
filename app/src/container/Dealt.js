@@ -1,6 +1,7 @@
 import React from "react";
 import MyNeedDealt from "../components/MyNeedDealt/MyNeedDealt.js";
 import Header from "../components/Header/index.js";
+import MyNavbar from "../components/MyNavbar/MyNavbar"
 
 import dealtData from './Dealt.json';
 
@@ -18,7 +19,7 @@ export default class Dealt extends React.Component{
 
     componentDidMount(){
     	let _this = this;
-    	fetch('http://222.198.39.25:8181/MOA/getWaitingMatter.do?pageSize=4&pageIndex='+this.state.pageIndex + '&type='+type, {
+    	fetch('http://222.198.39.25:8080/MOA/getWaitingMatter.do?pageSize=4&pageIndex='+this.state.pageIndex + '&type='+type, {
 		  // method: 'POST',
 		  // headers: {
 		  //   'Content-Type': 'application/json',
@@ -57,7 +58,8 @@ export default class Dealt extends React.Component{
 				title = "在办事项";
 			return (
 			<div>
-				<Header title={title}/>
+				{/*<Header title={title}/>*/}
+				<MyNavbar navName="代办事项"/>
 				{
 					this.state.data.map((item,index)=>{
 						return <MyNeedDealt key={index} data={item}  title={title} count={index+1+(this.state.pageIndex-1)*pageSize}/>

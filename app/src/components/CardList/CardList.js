@@ -26,7 +26,7 @@ class CardList extends React.Component {
 	}
 
 	componentDidMount() {
-		let result = fetch('http://222.198.39.25:8181/MOA/getWaitingMatterInfoByID.do?runID=8976290');
+		let result = fetch('http://222.198.39.25:8080/MOA/getWaitingMatterInfoByID.do?runID=8976290');
 		result.then((res) => {
 			return res.json();
 		}).then((json) => {
@@ -36,7 +36,7 @@ class CardList extends React.Component {
 			});
 		});
 
-		let result2 = fetch("http://222.198.39.25:8181/MOA/getNextTask.do", {
+		let result2 = fetch("http://222.198.39.25:8080/MOA/getNextTask.do", {
 			method: 'POST',
 			headers: {
 				"Content-Type": "application/x-www-form-urlencoded"
