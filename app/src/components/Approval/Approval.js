@@ -76,9 +76,7 @@ class Approval extends React.Component {
 			<div className="approval">
 				<Flex direction="row" justify="start">
 					<Flex.Item><span className="title">审批意见：</span></Flex.Item>
-					{/*<div className="title">审批意见：</div>*/}
 					<Flex.Item style={{flexShrink: 1}}>
-						{/*<input type="text" className="approvalshow" disabled="disabled" placeholder="请选择审批意见" value={this.state.radio.label}/>*/}
 						<span className="approvalshow"> {this.state.radio.label ? this.state.radio.label : '请选择审批意见'}</span>
 					</Flex.Item>
 					<Flex.Item>
