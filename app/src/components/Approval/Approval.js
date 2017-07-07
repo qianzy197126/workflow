@@ -17,6 +17,7 @@ class Approval extends React.Component {
 	constructor(props) {
 		super(props);
 		this.state = {
+			data: {},
 			modal: false,
 			radio: {
 				value: -1,
@@ -47,6 +48,8 @@ class Approval extends React.Component {
 			[key]: false
 		});
 	}
+
+	component() {}
 
 	render() {
 		const data = [{
