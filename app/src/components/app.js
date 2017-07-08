@@ -1,8 +1,21 @@
-import React, { Component } from 'react'
-import { Link } from 'react-router'
+import React, {
+  Component
+} from 'react'
+import {
+  Link
+} from 'react-router'
 import MyNeedDealt from '../components/MyNeedDealt/MyNeedDealt.js'
-import { NavBar, Icon } from 'antd-mobile'
-import { Card, WingBlank, WhiteSpace,Flex, List} from 'antd-mobile';
+import {
+  NavBar,
+  Icon
+} from 'antd-mobile'
+import {
+  Card,
+  WingBlank,
+  WhiteSpace,
+  Flex,
+  List
+} from 'antd-mobile';
 
 import MyNavbar from './MyNavbar/MyNavbar'
 import CardList from './CardList/CardList'

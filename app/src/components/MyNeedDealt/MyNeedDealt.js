@@ -1,34 +1,42 @@
-import React, { Component } from 'react'
+import React, {
+    Component
+} from 'react'
 
 import img from "./activity.png";
 import date_img from './date.png';
 import person_img from './person.png';
-import { Card, WingBlank, WhiteSpace } from 'antd-mobile';
-import { Link } from 'react-router';
+import {
+    Card,
+    WingBlank,
+    WhiteSpace
+} from 'antd-mobile';
+import {
+    Link
+} from 'react-router';
 import "./MyNeedDealt.less";
 
 
-class MyNeedDealt extends Component{
-	constructor(props) {
+class MyNeedDealt extends Component {
+    constructor(props) {
         super(props);
         this.setState = {
-             data:this.props.data
-        }
-        
+            data: this.props.data
+        }      
     }
 
-    
 
-    render(){
+    render() {
         let message;
         let id = this.props.data.RUNID;
         let path = "/mybutton?RUNID=" + id;
+
         if(!this.props.data){
                 return (
                     <div><span>暂无数据。。。</span></div> 
                     )
         }
         else{
+
             return (
                 <WingBlank size="lg">
                     <WhiteSpace size="lg" />
@@ -78,7 +86,7 @@ class MyNeedDealt extends Component{
                 </WingBlank>
             )
         }
-    	
+
     }
 }
 

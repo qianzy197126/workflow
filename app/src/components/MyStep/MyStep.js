@@ -1,9 +1,18 @@
-import React, { Component } from 'react'
+import React, {
+    Component
+} from 'react'
 import './MyStep.less'
 
-import { Steps, WingBlank, WhiteSpace, Icon } from 'antd-mobile'
-
-import json from './Mock.json' 
+import {
+    Steps,
+    WingBlank,
+    WhiteSpace,
+    Icon
+} from 'antd-mobile'
+import {
+    PATH
+} from '../../config/path';
+import json from './Mock.json'
 
 const Step = Steps.Step;
 const waitSvg = <Icon type={require('../../images/step/ellipsis-circle.svg')}/>
@@ -20,19 +29,19 @@ class MyStep extends Component {
 
 
 
-    rendItem(){
-        
+    rendItem() {
+
         let count = 0;
         let insertWait;
-        if(this.state.waitData) {
+        if (this.state.waitData) {
             insertWait = [<Step key={count++} status="error" title={this.state.waitData.tackName} icon={waitSvg} 
                                 description={"未确认 " + this.state.waitData.creator}/>];
-        }else {
+        } else {
             insertWait = [<Step key={count++} status="error" icon={waitSvg}/>];
         }
 
 
-        
+
         let insertFinish = this.state.data.map((item) => {
             return <Step key={count++} status="finish" title={item.ACTIVITYNAME} icon={finishSvg} 
                 description={item.CREATETIME + " " + item.CREATORNAME}/>;
@@ -43,7 +52,7 @@ class MyStep extends Component {
 
         let insert = insertWait.concat(insertFinish);
         return insert;
-        
+
     }
 
     componentDidMount() {
@@ -51,7 +60,7 @@ class MyStep extends Component {
     }
 
     fetchData(runID) {
-        fetch('http://222.198.39.25:8181/MOA/getWaitingMatterInfoByID.do?runID=8976290', {
+        fetch(PATH + 'getWaitingMatterInfoByID.do?runID=8976290 ', {
             method: 'GET'
         }).then((response) => {
             return response.json();
@@ -62,10 +71,10 @@ class MyStep extends Component {
                 tackName: data.TASKNAME,
                 reviewUserName: data.REVIEW_USER_NAME
             };
-            
+
 
             let id = runID ? runID : '';
-            fetch('http://222.198.39.25:8181/MOA/getProcess.do?runID=' + runID, {
+            fetch(PATH + 'getProcess.do?runID=' + runID, {
                 method: 'GET'
             }).then((response) => {
                 return response.json();
@@ -80,7 +89,7 @@ class MyStep extends Component {
             });
         })
 
-        
+
     }
 
     render() {
@@ -91,25 +100,6 @@ class MyStep extends Component {
                 <WingBlank size="lg">
                     <Steps size="small">
                         {this.rendItem()}
-                        {/*<Step status="process" title="收文登记 叶太霞" /> 
-                        <Step status="finish" title="办公室主任拟办 钟飞龙 请谭局阅示" /> 
-                        <Step status="finish" title="领导批示 谭立云 已阅，请信息处阅办" />
-                        <Step status="finish" title="办公室主任拟办 钟飞龙 请阅处" />  
-                        <Step status="finish" title="处室拟办 王庆珍 请吴工牵头办理" /> 
-                        <Step status="finish" title="处室副拟办 吴川 同意" /> */}
-                        {/*<Step status="process" title="收文登记 叶太霞"/> 
-                        <Step status="finish" title="办公室主任拟办 钟飞龙 请谭局阅示"/> 
-                        <Step status="finish" title="领导批示 谭立云 已阅，请信息处阅办" />
-                        <Step status="finish" title="办公室主任拟办 钟飞龙 请阅处" />  
-                        <Step status="finish" title="处室拟办 王庆珍 请吴工牵头办理" /> 
-                        <Step status="finish" title="处室副拟办 吴川 同意" /> */}
-                        
-                        {/*<Step status="error" title="收文登记 叶太霞" icon={<Icon type={require('../../images/step/ellipsis-circle.svg')} />}/> 
-                        <Step status="finish" title="办公室主任拟办 钟飞龙 请谭局阅示" icon={<Icon type={require('../../images/step/finish.svg')} />}/> 
-                        <Step status="finish" title="领导批示 谭立云 已阅，请信息处阅办" icon={<Icon type={require('../../images/step/finish.svg')} />}/>
-                        <Step status="finish" title="办公室主任拟办 钟飞龙 请阅处" icon={<Icon type={require('../../images/step/finish.svg')} />}/>  
-                        <Step status="finish" title="处室拟办 王庆珍 请吴工牵头办理" icon={<Icon type={require('../../images/step/finish.svg')} />}/> 
-                        <Step status="finish" title="处室副拟办 吴川 同意" icon={<Icon type={require('../../images/step/finish.svg')} />}/> */}
                     </Steps>
                 </WingBlank>
             </WingBlank>
