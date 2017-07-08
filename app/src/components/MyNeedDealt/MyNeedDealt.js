@@ -17,11 +17,7 @@ class MyNeedDealt extends Component{
         
     }
 
-    // handleClick(arg){
-    //     alert(arg)
-    // }
-
-    //onClick={this.handleClick.bind(this,this.props.data.RUNID)}
+    
 
     render(){
         let message;
@@ -29,7 +25,7 @@ class MyNeedDealt extends Component{
         let path = "/mybutton?RUNID=" + id;
         if(!this.props.data){
                 return (
-                    <div><span>暂无数据。。。</span></div>
+                    <div><span>暂无数据。。。</span></div> 
                     )
         }
         else{
@@ -39,7 +35,7 @@ class MyNeedDealt extends Component{
                     <Card>
                         <div className="cardHeader">
                           <Card.Header 
-                            title={<span className="span_style">{this.props.title}{this.props.count}{this.props.data.count}</span>}
+                            title={<span className="span_style">{this.props.title}{this.props.count}</span>}
                             thumb={img}
                             extra={             
                                 <Link to={`/path/${id}`}>

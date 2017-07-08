@@ -8,12 +8,12 @@ import App from './components/app'
 import AppComponent from './components/app'
 import MyButton from './components/Button'
 import Dealt from "./container/Dealt.js";
-
-
+import LoginComponent from './components/Login/LoginComponent.js';
 const RouterApp = () => (
   <Router history={hashHistory}>
     <Route path='/path/:id' component={App}/>
     <Route path="/dealt" component={Dealt} />
+    <Route path='/login' component={LoginComponent} />
   </Router>
 )
 
