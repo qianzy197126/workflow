@@ -1,7 +1,22 @@
-import React, { Component } from 'react'
-import { Modal, Button, WhiteSpace, WingBlank, Toast, SearchBar, Accordion, List, Checkbox, Flex} from 'antd-mobile'
+import React, {
+    Component
+} from 'react'
+import {
+    Modal,
+    Button,
+    WhiteSpace,
+    WingBlank,
+    Toast,
+    SearchBar,
+    Accordion,
+    List,
+    Checkbox,
+    Flex
+} from 'antd-mobile'
 import './StaffModal.less'
-
+import {
+    PATH
+} from '../../config/path';
 const alert = Modal.alert
 const CheckboxItem = Checkbox.CheckboxItem
 
@@ -10,133 +25,129 @@ import searchJson from './MockSearch.json'
 
 
 
-
 const hasSelected = (key, arr) => {
     return arr.some(item => {
         return item === key;
-    }); 
+    });
 }
 
 class StaffModal extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      modal: false,
-      data: [],
-      selected: [],
-      selectedName: []
-    };
-  }
-
-  componentDidMount() {
-    this.fetchData();
-  }
-
-
-  //用于获取远程数据
-  fetchData(name) {
-    let _this = this;
-    let fullName = name ? name : '';
-    console.log("fullName " + fullName);
-    fetch('http://222.198.39.25:8080/MOA/departmentTree.do?depID=1247027&fullName=' + fullName,{
-        method: 'GET'
-    }).then((response) => {
-        return response.json();
-    }).then(data => {
-        console.log(JSON.parse(data));
-        _this.setState({
-            data: JSON.parse(data)
-        });
-    }).catch((err) => {
-        console.log(err);
-        alert('获取数据存在问题');
-    });
-  }
-
-
-  showModal = key => (e) => {
-    // 现象：如果弹出的弹框上的 x 按钮的位置、和手指点击 button 时所在的位置「重叠」起来，
-    // 会触发 x 按钮的点击事件而导致关闭弹框 (注：弹框上的取消/确定等按钮遇到同样情况也会如此)
-    e.preventDefault(); // 修复 Android 上点击穿透
-    this.setState({
-      [key]: true,
-    });
-  }
-  onClose = key => () => {
-    this.setState({
-      [key]: false,
-    });
-  }
-
-  onChange = (key) => {
-  }
-
-  onSelectChange = (key, name) => {
-    //通过员工id进行员工选择状态的转换
-
-    let selected = this.state.selected.concat();
-    let selectedName = this.state.selectedName.concat();
-    let count = 0;
-    let deleteIndex = 0;
-
-    if(hasSelected(key, selected)) {
-        selected = selected.filter((item)=>{
-            count++;
-            if(item !== key) {
-                return true;
-            }else {
-                deleteIndex = count;
-                return false;
-            }   
-        })
-        count = 0;
-        selectedName = selectedName.filter(() => {
-            count++;
-            return count !== deleteIndex;
-        });
-    }else {
-        selected.push(key);
-        selectedName.push(name);
+    constructor(props) {
+        super(props);
+        this.state = {
+            modal: false,
+            data: [],
+            selected: [],
+            selectedName: []
+        };
     }
 
-    this.setState({
-        selected: selected,
-        selectedName: selectedName
-    }, ()=> {
+    componentDidMount() {
+        this.fetchData();
+    }
 
-    });
 
-    // console.log(key);
-    // let selected = this.state.selected.concat();
+    //用于获取远程数据
+    fetchData(name) {
+        let _this = this;
+        let fullName = name ? name : '';
+        fetch(PATH + 'departmentTree.do?depID=1247027&fullName=' + fullName, {
+            method: 'GET'
+        }).then((response) => {
+            return response.json();
+        }).then(data => {
+            _this.setState({
+                data: JSON.parse(data)
+            });
+        }).catch((err) => {
+            console.log(err);
+            alert('获取数据存在问题');
+        });
+    }
 
-    // debugger
-    // if(selected[key]) {
-    //     debugger
-    //     delete selected[key];
-    // }else {
-    //     selected[key] = key;
-    // }
+
+    showModal = key => (e) => {
+        // 现象：如果弹出的弹框上的 x 按钮的位置、和手指点击 button 时所在的位置「重叠」起来，
+        // 会触发 x 按钮的点击事件而导致关闭弹框 (注：弹框上的取消/确定等按钮遇到同样情况也会如此)
+        e.preventDefault(); // 修复 Android 上点击穿透
+        this.setState({
+            [key]: true,
+        });
+    }
+    onClose = key => () => {
+        this.setState({
+            [key]: false,
+        });
+    }
+
+    onChange = (key) => {}
+
+    onSelectChange = (key, name) => {
+        //通过员工id进行员工选择状态的转换
+
+        let selected = this.state.selected.concat();
+        let selectedName = this.state.selectedName.concat();
+        let count = 0;
+        let deleteIndex = 0;
+
+        if (hasSelected(key, selected)) {
+            selected = selected.filter((item) => {
+                count++;
+                if (item !== key) {
+                    return true;
+                } else {
+                    deleteIndex = count;
+                    return false;
+                }
+            })
+            count = 0;
+            selectedName = selectedName.filter(() => {
+                count++;
+                return count !== deleteIndex;
+            });
+        } else {
+            selected.push(key);
+            selectedName.push(name);
+        }
+
+        this.setState({
+            selected: selected,
+            selectedName: selectedName
+        }, () => {
+
+        });
+
+        // console.log(key);
+        // let selected = this.state.selected.concat();
+
+        // debugger
+        // if(selected[key]) {
+        //     debugger
+        //     delete selected[key];
+        // }else {
+        //     selected[key] = key;
+        // }
         // console.log(selected);
-    // this.setState({
-    //     selected: selected
-    // }, function() {
-    //     console.log(this.state);
-    // });
+        // this.setState({
+        //     selected: selected
+        // }, function() {
+        //     console.log(this.state);
+        // });
 
 
-  }
+    }
 
-  onSearchChange = (key) => {
-    // this.setState();
-    // this.forceUpdate();
-    this.fetchData(key);
-  }
+    onSearchChange = (key) => {
+        // this.setState();
+        // this.forceUpdate();
+        this.fetchData(key);
+    }
 
-  renderItem = () => {
-    let data = this.state.data;
-    let insert = data.map(item => {
-        return (
-            <Accordion.Panel key={item.id} header={item.text} className="pad">
+    renderItem = () => {
+        let data = this.state.data;
+        let insert = data.map(item => {
+            return (
+                <Accordion.Panel key={item.id} header={item.text} className="pad">
                 <List className="sm-list">
                     {item.children.map(staff => {
                         return (
@@ -148,21 +159,21 @@ class StaffModal extends Component {
                     })}
                 </List>
             </Accordion.Panel>
-        )
-    });
-    return insert;
-  }
+            )
+        });
+        return insert;
+    }
 
-  renderName() {
-    let selectedName = this.state.selectedName.concat();
-    let nameStr = selectedName.join(',');
-    return nameStr;
-  }
+    renderName() {
+        let selectedName = this.state.selectedName.concat();
+        let nameStr = selectedName.join(',');
+        return nameStr;
+    }
 
-  render() {
+    render() {
 
-    return (
-        <div>
+        return (
+            <div>
             <Flex direction="row" justify="start">
                 <Flex.Item><span className="sm-title">下一步处理人：</span></Flex.Item>
                 <Flex.Item><span className="sm-name">{this.state.selected.length > 0 ? this.renderName() : '请选择人员'}</span></Flex.Item>
@@ -193,8 +204,8 @@ class StaffModal extends Component {
                 </Accordion>
             </Modal>
         </div>
-    );
-  }
+        );
+    }
 }
 
 export default StaffModal

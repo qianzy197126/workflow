@@ -8,7 +8,7 @@ import {
 import App from './components/app'
 import AppComponent from './components/app'
 import MyButton from './components/Button'
-import Dealt from "./container/Dealt.js";
+import Dealt from "./components/Dealt/Dealt";
 
 
 const RouterApp = () => (

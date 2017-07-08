@@ -1,0 +1,9 @@
+.loadmoreing{
+	width: 100%;
+	background-color: gray;
+	opacity: .3;
+	height: 80px;
+	text-align: center;
+	line-height: 80px;
+	font-size: 44px;
+}
