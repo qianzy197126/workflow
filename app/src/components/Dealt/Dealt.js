@@ -16,7 +16,8 @@ export default class Dealt extends React.Component {
             data: [],
             pageIndex: 1,
             pageSize: 10,
-            type: 0 //0: 代办 1： 在办
+            type: 0, //0: 代办 1： 在办
+            ismore: true
         };
 
         this.loadData.bind(this);
@@ -36,6 +37,7 @@ export default class Dealt extends React.Component {
         result.then((res) => {
             return res.json();
         }).then((json) => {
+            console.log(JSON.parse(json))
             if (this.state.pageIndex === 1) {
                 this.setState({
                     data: JSON.parse(json)
@@ -45,6 +47,9 @@ export default class Dealt extends React.Component {
                     data: this.state.data.concat(JSON.parse(json))
                 });
             }
+        }).catch(e => {
+            alert("连接失败");
+            return;
         });
     }
 
@@ -58,6 +63,7 @@ export default class Dealt extends React.Component {
             const top = loadmore.getBoundingClientRect().top;
             const windowHeight = window.screen.height;
 
+            console.log(this);
             if (top && top / 3 < windowHeight) {
                 _this.setState({
                     pageIndex: ++index

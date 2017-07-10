@@ -11,7 +11,8 @@ import {
     Accordion,
     List,
     Checkbox,
-    Flex
+    Flex,
+    Radio
 } from 'antd-mobile'
 import './StaffModal.less'
 import {
@@ -19,6 +20,7 @@ import {
 } from '../../config/path';
 const alert = Modal.alert
 const CheckboxItem = Checkbox.CheckboxItem
+const RadioItem = Radio.RadioItem;
 
 import json from './Mock.json'
 import searchJson from './MockSearch.json'
@@ -38,7 +40,8 @@ class StaffModal extends Component {
             modal: false,
             data: [],
             selected: [],
-            selectedName: []
+            selectedName: [],
+            single: -1
         };
     }
 
@@ -60,7 +63,6 @@ class StaffModal extends Component {
                 data: JSON.parse(data)
             });
         }).catch((err) => {
-            console.log(err);
             alert('获取数据存在问题');
         });
     }
@@ -78,6 +80,13 @@ class StaffModal extends Component {
         this.setState({
             [key]: false,
         });
+        if (this.props.countersign) {
+            let IDStr = this.state.selected.join(',');
+            this.props.setuserIDs(IDStr)
+        } else {
+            this.props.setuserIDs(this.state.single)
+        }
+
     }
 
     onChange = (key) => {}
@@ -116,30 +125,9 @@ class StaffModal extends Component {
         }, () => {
 
         });
-
-        // console.log(key);
-        // let selected = this.state.selected.concat();
-
-        // debugger
-        // if(selected[key]) {
-        //     debugger
-        //     delete selected[key];
-        // }else {
-        //     selected[key] = key;
-        // }
-        // console.log(selected);
-        // this.setState({
-        //     selected: selected
-        // }, function() {
-        //     console.log(this.state);
-        // });
-
-
     }
 
     onSearchChange = (key) => {
-        // this.setState();
-        // this.forceUpdate();
         this.fetchData(key);
     }
 
@@ -149,13 +137,22 @@ class StaffModal extends Component {
             return (
                 <Accordion.Panel key={item.id} header={item.text} className="pad">
                 <List className="sm-list">
-                    {item.children.map(staff => {
-                        return (
-                            <CheckboxItem key={staff.id} checked={hasSelected(staff.id, this.state.selected)} 
-                                onChange={() => this.onSelectChange(staff.id, staff.text)}>
-                                {staff.text}
-                            </CheckboxItem>
-                        )
+                    {item.children.map((staff,index) => {
+                        if(this.props.countersign){
+                            return (
+                                <CheckboxItem key={staff.id} checked={hasSelected(staff.id, this.state.selected)} 
+                                    onChange={() => this.onSelectChange(staff.id, staff.text)}>
+                                    {staff.text}
+                                </CheckboxItem>
+                            );
+                        }else{
+                            return (
+                                <RadioItem key={index} checked={this.state.single === staff.id}
+                                    onChange={() => {this.setState({single:staff.id})}}>
+                                    {staff.text}
+                                </RadioItem>
+                            );
+                        }
                     })}
                 </List>
             </Accordion.Panel>
@@ -186,7 +183,7 @@ class StaffModal extends Component {
                 visible={this.state.modal}
                 onClose={this.onClose('modal')}
                 footer={[
-                    { text: '取消', onPress: () => { this.setState({selected: [], selectedName: []}); this.onClose('modal')(); } },
+                    { text: '取消', onPress: () => { this.setState({selected: [], selectedName: []},() =>{this.props.setuserIDs("")}); this.onClose('modal')(); } },
                     { text: '确定', onPress: () => { this.onClose('modal')(); } }
                     ]}
                 style={{width: '90%'} }
@@ -194,13 +191,6 @@ class StaffModal extends Component {
                 <SearchBar placeholder="输入姓名" onChange={this.onSearchChange}/>
                 <Accordion defaultActiveKey="0" className="sm-accordion" onChange={this.onChange}>
                     {this.renderItem()}
-                    {/*<Accordion.Panel header="Title 1" className="pad">
-                        <List className="sm-list">
-                            <List.Item>Content 1</List.Item>
-                            <List.Item>Content 2</List.Item>
-                            <List.Item>Content 3</List.Item>
-                        </List>
-                    </Accordion.Panel>*/}
                 </Accordion>
             </Modal>
         </div>

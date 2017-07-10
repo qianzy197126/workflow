@@ -16,7 +16,9 @@ import {
   Flex,
   List
 } from 'antd-mobile';
-
+import {
+  PATH
+} from '../config/path'
 import MyNavbar from './MyNavbar/MyNavbar'
 import CardList from './CardList/CardList'
 import StaffModal from './StaffModal/StaffModal'
@@ -27,28 +29,71 @@ import './app.less'
 
 class AppComponent extends Component {
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      data: {},
+      isback: false,
+      stepscount: -1,
+      comments: {},
+      countersign: true,
+      userIDs: ""
+    }
+  }
+
+  handle(obj) {
+    this.setState({
+      data: Object.assign(this.state.data, obj)
+    });
+  }
+
+  setuserIDs(IDs) {
+    this.setState({
+      userIDs: IDs
+    });
+  }
+
+  isback(isback) {
+    this.setState({
+      isback: isback
+    });
+  }
+
+  setcomments(obj) {
+    this.setState({
+      comments: obj
+    });
+  }
+
+  setstepscount(count) {
+    this.setState({
+      stepscount: count
+    });
+  }
+
+  setcountersign(sign) {
+    this.setState({
+      countersign: sign
+    });
+  }
+
   render() {
     return (
-
       <div className="flex-container">
-
           <Flex>
             <Flex.Item><MyNavbar navName="处室副拟办"/></Flex.Item>
           </Flex>
           <WhiteSpace size="lg" />
           <Flex>
-            <Flex.Item><CardList /></Flex.Item>
+            <Flex.Item><CardList handleFn={this.handle.bind(this)} isback={this.isback.bind(this)} setstepscount={this.setstepscount.bind(this)} setcountersign={this.setcountersign.bind(this)}/></Flex.Item>
           </Flex>
           <WhiteSpace size="lg" />
           <Flex>
-            {/*<Flex.Item><StaffModal/></Flex.Item>*/}
-            {/*<Flex.Item><Approval/></Flex.Item>*/}
             <Flex.Item>
               <List>
-                <List.Item><StaffModal/></List.Item>
-                <List.Item><Approval/></List.Item>
-                <List.Item><RemindManagement/></List.Item>
-                {/*<List.Item><Approval/></List.Item>*/}
+                <List.Item><StaffModal isback={this.state.isback} setuserIDs={this.setuserIDs.bind(this)} countersign={this.state.countersign} /></List.Item>
+                <List.Item><Approval setcomments={this.setcomments.bind(this)} isback={this.state.isback}/></List.Item>
+                <List.Item><RemindManagement {...this.state} /></List.Item>
               </List>
             </Flex.Item>
           </Flex>
@@ -56,7 +101,7 @@ class AppComponent extends Component {
           <Flex direction="row" justify="start">
             <Flex.Item>
               <List>
-                <List.Item><MyStep/></List.Item>  
+                <List.Item><MyStep/></List.Item>
               </List>
             </Flex.Item>
           </Flex>

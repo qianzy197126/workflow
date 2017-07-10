@@ -23,9 +23,10 @@ class CardList extends React.Component {
 			modal: false,
 			radio: {
 				value: -1,
-				label: ""
+				name: "",
+				code: ""
 			}
-		}
+		};
 	}
 
 	componentDidMount() {
@@ -43,7 +44,7 @@ class CardList extends React.Component {
 			headers: {
 				"Content-Type": "application/x-www-form-urlencoded"
 			},
-			body: "processName=" + "公路局行政发文处理笺" + "&taskName=" + this.state.data.TASKNAME
+			body: "processID=" + "1364105" + "&taskName=" + "拟稿"
 		});
 
 		result2.then((res) => {
@@ -66,15 +67,38 @@ class CardList extends React.Component {
 		this.setState({
 			[key]: false
 		});
+		this.props.handleFn(this.state.data);
+		let step = this.state.radio;
+
+		this.props.handleFn({
+			step
+		});
+		this.props.isback(this.state.radio.code === 'back' ? true : false);
+		this.props.setstepscount(this.state.reviewsteps.length);
 	}
 
-	onChange = (value, name) => {
-		this.setState({
-			radio: {
-				value: value,
-				name: name
-			}
-		});
+	onChange = (value, name, code) => {
+		if (name.indexOf("会签") >= 0) {
+			this.setState({
+				radio: {
+					value: value,
+					name: name,
+					code: code
+				}
+			}, () => {
+				this.props.setcountersign(true);
+			});
+		} else {
+			this.setState({
+				radio: {
+					value: value,
+					name: name,
+					code: code
+				}
+			}, () => {
+				this.props.setcountersign(false);
+			});
+		}
 	};
 
 	render() {
@@ -181,7 +205,7 @@ class CardList extends React.Component {
 				        <List>
 				        	{this.state.reviewsteps.map((item, index) => {
 								return (
-									<RadioItem key={index} checked={this.state.radio.value === item.value} onChange={() => this.onChange(item.value, item.name)}>
+									<RadioItem key={index} checked={this.state.radio.value === item.value} onChange={() => this.onChange(item.value, item.name, item.code)}>
 										{item.name}
 					        		</RadioItem>
 					        	);
