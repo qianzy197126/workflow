@@ -9,7 +9,8 @@ import App from './components/app'
 import AppComponent from './components/app'
 import MyButton from './components/Button'
 import Dealt from "./components/Dealt/Dealt";
-import LoginComponent from './components/Login/LoginComponent'
+import LoginComponent from './components/Login/LoginComponent';
+import Transaction from './components/Transaction/Transaction.js';
 
 const RouterApp = () => (
   <Router history={hashHistory}>
@@ -18,6 +19,7 @@ const RouterApp = () => (
       <Route path='/path/:id' component={App}/>
       <Route path="/dealt" component={Dealt} />
       <Route path='/login' component={LoginComponent} />
+      <Route path='transcation' component={Transaction}/>
     </Route>
   </Router>
 )
