@@ -15,11 +15,11 @@ import Transaction from './components/Transaction/Transaction.js';
 const RouterApp = () => (
   <Router history={hashHistory}>
     <Route path="/">
-      <IndexRoute component={Dealt}/>
+      <IndexRoute component={LoginComponent}/>
       <Route path='/path/:id' component={App}/>
       <Route path="/dealt" component={Dealt} />
       <Route path='/login' component={LoginComponent} />
-      <Route path='transcation' component={Transaction}/>
+      <Route path='/transcation' component={Transaction}/>
     </Route>
   </Router>
 )
