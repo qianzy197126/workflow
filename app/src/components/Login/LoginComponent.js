@@ -1,18 +1,24 @@
 import React from 'react'
 
-import { List, InputItem,Button ,Flex, WingBlank, WhiteSpace } from 'antd-mobile';
+import {
+	List,
+	InputItem,
+	Button,
+	Flex,
+	WingBlank,
+	WhiteSpace
+} from 'antd-mobile';
 
-class LoginComponent extends React.Component{
+class LoginComponent extends React.Component {
 
 	constructor(props) {
-        super(props);
-        this.setState = {
-      
-        }
-        
-    }
+		super(props);
+		this.state = {
 
-	render(){
+		}
+	}
+
+	render() {
 		return (
 			<div>
 	          <WingBlank size='lg'>
@@ -26,7 +32,7 @@ class LoginComponent extends React.Component{
 		        <Button className="btn" type="primary">登&nbsp;&nbsp;&nbsp;录</Button>
 	          </WingBlank>
 	  		</div>
-			)
+		)
 	}
 }
 
